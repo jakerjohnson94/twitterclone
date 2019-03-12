@@ -19,8 +19,16 @@ from twitterclone.notification.models import Notification
 from twitterclone.tweet.models import Tweet
 from twitterclone.twitteruser.models import TwitterUser
 
+from twitterclone.tweet.urls import urlpatterns as tweet_urls
+from twitterclone.twitteruser.urls import urlpatterns as user_urls
+
+
 admin.site.register(TwitterUser)
 admin.site.register(Tweet)
 admin.site.register(Notification)
 
 urlpatterns = [path("admin/", admin.site.urls)]
+
+urlpatterns += tweet_urls
+
+urlpatterns += user_urls
