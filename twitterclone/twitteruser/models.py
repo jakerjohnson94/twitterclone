@@ -7,12 +7,13 @@ from django.contrib.auth.models import User
 
 class TwitterUser(models.Model):
     user = models.OneToOneField(
-        User, verbose_name="User", on_delete=models.CASCADE
+        User, verbose_name="User", on_delete=models.CASCADE, unique=True
     )
-    handle = models.CharField("Twitter Handle", max_length=18)
+    handle = models.CharField("Twitter Handle", max_length=18, unique=True)
     followers = models.ManyToManyField(
         "TwitterUser", verbose_name="Followers", blank=True
     )
+    email = models.EmailField("Email", unique=True)
 
     def __str__(self):
         return self.handle
