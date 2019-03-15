@@ -1,0 +1,15 @@
+
+{% for tweet in data.tweets %}
+<div>
+<h2>
+{% if tweet.sender_id != data.user%}
+<a href="{% url 'userdetail' tweet.sender_id.id %}">@{{tweet.sender_id.handle}}</a>
+{% else %}
+@{{tweet.sender_id.handle}}
+{% endif %}
+</h2>
+<h3>{{tweet.timestamp}}</h3>
+
+<p>{{tweet.body}}</p>
+</div>
+{% endfor %}

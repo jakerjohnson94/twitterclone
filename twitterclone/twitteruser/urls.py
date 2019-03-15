@@ -7,8 +7,8 @@ from twitterclone.twitteruser.views import (
 )
 
 urlpatterns = [
-    path("user/<int:user_id>", user_detail, name="userdetail"),
     path("", user_homepage, name="homepage"),
+    path("user/<int:user_id>", user_detail, name="userdetail"),
     path("signup/", user_signup, name="signup"),
 ]
 
