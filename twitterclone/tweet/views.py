@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from .models import Tweet
 from .forms import PostTweetForm
 from twitterclone.helpers import get_user_data
-from twitterclone.tweet.helpers import contains_user_mention
+from twitterclone.tweet.helpers import get_mentioned_user
 from twitterclone.notification.models import Notification
 from twitterclone.twitteruser.models import TwitterUser
 
@@ -33,10 +33,9 @@ def tweet_post(request):
             # obj = form.save(commit=False)
             # obj.sender_id = data["user"]
             # obj.save()
-            if contains_user_mention(body) is not False:
-                Notification.objects.create(
-                    tweet=tweet, tagged=user_data["user"]
-                )
+            mentioned_user = get_mentioned_user(body)
+            if mentioned_user is not False:
+                Notification.objects.create(tweet=tweet, tagged=mentioned_user)
             return redirect("homepage")
 
     else:
