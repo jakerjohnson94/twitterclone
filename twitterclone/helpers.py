@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from twitterclone.tweet.models import Tweet
 from twitterclone.twitteruser.models import TwitterUser
+from twitterclone.notification.models import Notification
 from itertools import chain
 
 
@@ -13,14 +14,11 @@ def get_user_data(user):
     sent_tweets = Tweet.objects.filter(Q(sender_id=t_user.id)).order_by(
         "-timestamp"
     )
-    subscribed_tweets = Tweet.objects.filter(
-        Q(sender_id__in=following)
-    ).order_by("-timestamp")
-    # all_tweets = list(chain(sent_tweets, subscribed_tweets)).order_by("timestamp")
     all_tweets = Tweet.objects.filter(
         Q(sender_id=t_user.id) | Q(sender_id__in=following)
     ).order_by("-timestamp")
 
+    notifications = Notification.objects.filter(tagged=t_user)
     return {
         "data": {
             "user": t_user,
@@ -28,7 +26,7 @@ def get_user_data(user):
             "followers": followers,
             "following": following,
             "sent_tweets": sent_tweets,
-            "subscribed_tweets": subscribed_tweets,
-            "tweets": all_tweets,
+            "all_tweets": all_tweets,
+            "notifications": notifications,
         }
     }

@@ -1,7 +1,17 @@
+<div class="card">
+  <div class="card-content">
 
-<div>
-<h2>@{{tweet.sender_id.handle}}</h2>
-<h3>{{tweet.timestamp}}</h3>
+    <span class="card-title">
+      {% if tweet.sender_id != data.user%}
+      <a href="{% url 'userdetail' tweet.sender_id.user.id %}">@{{tweet.sender_id.handle}}</a>
+      {% else %}
+      @{{tweet.sender_id.handle}}
+      {% endif %}
+    </span>
 
-<p>{{tweet.body}}</p>
+  <p class="grey-text">{{tweet.timestamp}}</p>
+
+  <p>{{tweet.body}}</p>
+
+  </div>
 </div>

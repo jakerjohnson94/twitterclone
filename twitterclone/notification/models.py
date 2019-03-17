@@ -11,3 +11,6 @@ class Notification(models.Model):
         TwitterUser, verbose_name="Tagged User", on_delete=models.CASCADE
     )
 
+    def __str__(self):
+        return f"@{self.tagged.handle.title()} tagged in Tweet from  @{self.tweet.sender_id.handle.title()}"
+

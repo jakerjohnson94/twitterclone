@@ -1,10 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.admin.views.decorators import staff_member_required
-from django.shortcuts import render, redirect
 from .models import TwitterUser
 from django.contrib.auth.models import User
 from .forms import TwitterUserSignupForm
@@ -36,20 +35,28 @@ def user_signup(request):
 
 
 def user_detail(request, user_id):
-    data = get_user_data(request.user)
+    html = "user_detail.html"
+    user = get_object_or_404(User, pk=user_id)
+    data = get_user_data(user)
     return render(request, html, data)
+
+
+def user_info_page(request, user_id):
+    html = "user_info_page.html"
+    user = get_object_or_404(User, pk=user_id)
+    user_data = get_user_data(user)
+    return render(request, html, user_data)
 
 
 @login_required
 def user_homepage(request):
     data = get_user_data(request.user)
     html = "user_homepage.html"
-    # twitter_user = get_object_or_404(TwitterUser, user__pk=request.user.id)
-    # followers = twitter_user.followers.all()
-
-    # following = TwitterUser.objects.filter(followers=twitter_user)
-    # tweets = Tweet.objects.filter(
-    #     Q(sender_id=twitter_user.id) | Q(sender_id__in=following)
-    # )
-    # following_tweets = Tweet.objects.filter()
     return render(request, html, data)
+
+
+def user_follow(request, user_id):
+    other_user = get_object_or_404(TwitterUser, pk=user_id)
+    user_data = get_user_data(request.user)["data"]
+    other_user.followers.add(user_data["user"])
+    return redirect("homepage")

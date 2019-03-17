@@ -6,6 +6,7 @@ from twitterclone.twitteruser.models import TwitterUser
 
 from twitterclone.tweet.urls import urlpatterns as tweet_urls
 from twitterclone.twitteruser.urls import urlpatterns as user_urls
+from twitterclone.notification.urls import urlpatterns as notification_urls
 from twitterclone.views import login_view, logout_action
 
 admin.site.register(TwitterUser)
@@ -21,3 +22,5 @@ urlpatterns = [
 urlpatterns += tweet_urls
 
 urlpatterns += user_urls
+
+urlpatterns += notification_urls

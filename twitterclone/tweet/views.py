@@ -5,9 +5,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect
 from .models import Tweet
-from twitterclone.twitteruser.models import TwitterUser
 from .forms import PostTweetForm
 from twitterclone.helpers import get_user_data
+from twitterclone.tweet.helpers import contains_user_mention
+from twitterclone.notification.models import Notification
+from twitterclone.twitteruser.models import TwitterUser
 
 
 def tweet_detail(request, tweet_id):
@@ -18,20 +20,23 @@ def tweet_detail(request, tweet_id):
 
 @login_required
 def tweet_post(request):
-    data = get_user_data(request.user)["data"]
-    print(data)
+    user_data = get_user_data(request.user)["data"]
     html = "tweet_post.html"
     if request.method == "POST":
         form = PostTweetForm(request.POST)
         if form.is_valid():
-            obj = form.save(commit=False)
-            obj.sender_id = data["user"]
-            obj.save()
-            # data = form.cleaned_data
-            # body = data["body"]
+            form_data = form.cleaned_data
+            body = form_data["body"]
+            sender = user_data["user"]
+            tweet = Tweet.objects.create(sender_id=sender, body=body)
 
-            # twitter_user = get_object_or_404(TwitterUser, user=request.user)
-            # Tweet.objects.create(sender_id=twitter_user, body=body)
+            # obj = form.save(commit=False)
+            # obj.sender_id = data["user"]
+            # obj.save()
+            if contains_user_mention(body) is not False:
+                Notification.objects.create(
+                    tweet=tweet, tagged=user_data["user"]
+                )
             return redirect("homepage")
 
     else:

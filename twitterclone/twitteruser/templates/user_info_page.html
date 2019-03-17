@@ -1,0 +1,20 @@
+{% include "head.html"%}
+{% include "header.html"%}
+<div class="container">
+  <div class="row">
+
+    <div class="col s6">
+      {% include "user_detail.html" with data=data %}
+    </div>
+        <div class="col s6">
+      {% include "tweet_list.html" with tweets=data.sent_tweets %}
+    </div>
+  </div>
+
+  <div class='row'>
+    <button class="btn blue">
+    <a class="white-text"href="{% url 'userfollow' data.user.id %}">Follow</a>
+    </button>
+  </div>
+
+</div>
