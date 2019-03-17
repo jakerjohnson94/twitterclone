@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "627ef89f247ecee27e9ef0dabe116108d09c47abf171c900a8817befa64f9dd2"
+            "sha256": "3fd03d20786c411c852c1514ae4eef400934ccbafa2fe746d88573870589c777"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -23,6 +23,13 @@
             ],
             "index": "pypi",
             "version": "==2.1.7"
+        },
+        "django-cdnjs": {
+            "hashes": [
+                "sha256:3044347c62a15196128aebf9bd1a08a4bdcf442e25ab23da28e2d195281c9683"
+            ],
+            "index": "pypi",
+            "version": "==2017.10.20.post2"
         },
         "pytz": {
             "hashes": [

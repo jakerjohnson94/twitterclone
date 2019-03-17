@@ -1,0 +1,19 @@
+{% include 'head.html'%}
+{% include 'header.html'%}
+
+{% block  content %}
+  <div class='container'>
+    <h5>
+      Post a Message
+    </h5>
+  </div>
+
+  <div class='container'>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class='btn blue' type="submit">Tweet</button>
+    </form>
+  </div>
+{% endblock %}
+

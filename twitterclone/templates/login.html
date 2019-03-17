@@ -1,9 +1,19 @@
-{% block title %}Login{% endblock %}
+{% include "head.html"%}
+{% include "header.html"%}
+<div class="container">
 
-{% block content %}
+
+  <h5>Login</h5>
+
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Login</button>
   </form>
-{% endblock %}
+
+  <p>Not a Member?
+  <a href={% url 'signup' %}>Sign Up</a>
+  </p>
+
+
+</div>

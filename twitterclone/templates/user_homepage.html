@@ -1,0 +1,18 @@
+{% include "head.html"%}
+{% include "header.html"%}
+<div class="container">
+  <div class="row">
+
+    <div class="col s6">
+      {% include "user_detail.html" with data=data %}
+    </div>
+
+
+
+    <div class="col s6">
+      {% include "tweet_list.html" with tweets=data.tweets %}
+    </div>
+</div>
+
+
+</div>

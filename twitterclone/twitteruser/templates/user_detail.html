@@ -1,7 +1,9 @@
-{% include "header.html"%}
 <div>
 <h2>@{{data.user.handle}}</h2>
-<h3>{{data.followers.count}} Follower(s)</h3>
+<h4>{{data.followers.count}} Follower(s)</h4>
+<h4> 
+
+{{data.sent_tweets.count}} Tweets(s)
+</h4>
 <br>
-{% include "tweet_list.html" with data=data %}
 </div>

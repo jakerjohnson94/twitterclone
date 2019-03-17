@@ -121,3 +121,4 @@ STATIC_URL = "/static/"
 
 # Auth Login path
 LOGIN_URL = "/login/"
+

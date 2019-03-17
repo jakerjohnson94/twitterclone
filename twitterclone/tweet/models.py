@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 class Tweet(models.Model):
@@ -17,6 +18,6 @@ class Tweet(models.Model):
         month = str(timestamp.month)
         day = str(timestamp.day)
         year = str(timestamp.year)
-        time = str(timestamp.hour) + ":" + str(timestamp.minute)
+        time = f"{str(timestamp.hour)}: {str(timestamp.minute)}"
         date = f"{month} {day}, {year}, {time}"
-        return self.sender_id.handle + " " + date
+        return f"{self.sender_id.handle} {date}"

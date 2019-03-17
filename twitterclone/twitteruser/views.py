@@ -9,6 +9,7 @@ from .models import TwitterUser
 from django.contrib.auth.models import User
 from .forms import TwitterUserSignupForm
 from twitterclone.tweet.models import Tweet
+from twitterclone.helpers import get_user_data
 
 
 def user_signup(request):
@@ -35,38 +36,20 @@ def user_signup(request):
 
 
 def user_detail(request, user_id):
-    html = "user_detail.html"
-    user = get_object_or_404(TwitterUser, pk=user_id)
-    followers = user.followers.all()
-    tweets = Tweet.objects.filter(sender_id=user_id)
-    return render(
-        request,
-        html,
-        {"data": {"user": user, "followers": followers, "tweets": tweets}},
-    )
+    data = get_user_data(request.user)
+    return render(request, html, data)
 
 
 @login_required
 def user_homepage(request):
-
+    data = get_user_data(request.user)
     html = "user_homepage.html"
-    twitter_user = get_object_or_404(TwitterUser, user__pk=request.user.id)
-    followers = twitter_user.followers.all()
+    # twitter_user = get_object_or_404(TwitterUser, user__pk=request.user.id)
+    # followers = twitter_user.followers.all()
 
-    following = TwitterUser.objects.filter(followers=twitter_user)
-    print(following.all())
-    tweets = Tweet.objects.filter(
-        Q(sender_id=twitter_user.id) | Q(sender_id__in=following)
-    )
+    # following = TwitterUser.objects.filter(followers=twitter_user)
+    # tweets = Tweet.objects.filter(
+    #     Q(sender_id=twitter_user.id) | Q(sender_id__in=following)
+    # )
     # following_tweets = Tweet.objects.filter()
-    return render(
-        request,
-        html,
-        {
-            "data": {
-                "user": twitter_user,
-                "followers": followers,
-                "tweets": tweets,
-            }
-        },
-    )
+    return render(request, html, data)

@@ -1,1 +1,24 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<div class="row center" style="padding-bottom: 3em; padding-top: .5em;">
+
+    <button class="btn blue" style="margin-right: 1em;">
+      <a class='white-text' href={% url 'homepage' %}>
+      Home
+      </a>
+    </button>
+
+    <div class="btn blue">
+      <a class='white-text' href={% url 'tweetpost' %}>
+      Tweet
+      </a>
+    </div>
+
+    <div class="btn blue">Notifications</div>
+
+    <div class="btn blue" style="margin-left: 1em;">
+    <a class='white-text' href={% url 'logout' %}>
+      Logout
+    </a>
+    </div>
+
+
+</div>

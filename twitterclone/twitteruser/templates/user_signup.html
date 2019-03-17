@@ -1,5 +1,11 @@
-<form method="post">
-  {% csrf_token %}
-  {{form.as_p}}
-  <input type="submit" value="Submit">
-</form>
+{% include "head.html"%}
+{% include "header.html"%}
+<div class="container">
+
+  <form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Submit">
+  </form>
+
+<div>
