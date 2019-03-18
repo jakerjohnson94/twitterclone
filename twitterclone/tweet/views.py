@@ -13,7 +13,7 @@ from twitterclone.twitteruser.models import TwitterUser
 
 
 def tweet_detail(request, tweet_id):
-    html = "tweet_detail.html"
+    html = "tweet_detail_view.html"
     tweet = get_object_or_404(Tweet, pk=tweet_id)
     return render(request, html, {"tweet": tweet})
 
