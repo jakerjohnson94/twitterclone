@@ -12,6 +12,12 @@ class Tweet(models.Model):
     sender_id = models.ForeignKey(
         TwitterUser, verbose_name="Sender", on_delete=models.CASCADE
     )
+    favorites = models.ManyToManyField(
+        TwitterUser,
+        related_name="favorites",
+        verbose_name="Favorites",
+        blank=True,
+    )
 
     def __str__(self):
         timestamp = self.timestamp

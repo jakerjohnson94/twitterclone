@@ -22,6 +22,7 @@ def get_user_data(user):
     notifications = Notification.objects.filter(tagged=t_user).order_by(
         "-tweet__timestamp"
     )
+    favorites = Tweet.objects.filter(favorites=t_user).order_by("-timestamp")
     return {
         "user": t_user,
         "auth_user": auth_user,
@@ -30,4 +31,5 @@ def get_user_data(user):
         "sent_tweets": sent_tweets,
         "all_tweets": all_tweets,
         "notifications": notifications,
+        "favorites": favorites,
     }

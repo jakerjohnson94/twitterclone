@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 django = "*"
 django-cdnjs = "*"
+django-easy-timezones = "*"
 
 [requires]
 python_version = "3.7"

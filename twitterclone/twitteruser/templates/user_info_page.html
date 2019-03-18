@@ -4,11 +4,10 @@
   <div class="row">
 
     <div class="col s4">
-      {% include "user_detail.html" with user=other_user.user followers=other_user.followers sent_tweets=other_user.sent_tweets %}
+      {% include "user_detail.html" with user=other_user.user followers=other_user.followers following=other_user.following sent_tweets=other_user.sent_tweets %}
 
 
 {% if other_user.user.id != logged_user.user.id %}
-
 
     <button class="btn blue">
       {% if followed == False %}
@@ -17,6 +16,7 @@
     <a class="white-text" href="{% url 'unfollow' other_user.user.id %}"> UnFollow </a> 
       {% endif %}
     </button>
+
 {% endif %}
 
 
