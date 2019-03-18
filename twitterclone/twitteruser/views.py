@@ -81,14 +81,16 @@ def user_follow(request, user_id):
     logged_user = get_user_data(request.user)["user"]
     other_user = get_object_or_404(TwitterUser, pk=user_id)
     other_user.followers.add(logged_user)
-    return redirect("homepage")
+    user_id = other_user.id
+    return redirect("userdetail", user_id=user_id)
 
 
 def user_unfollow(request, user_id):
     logged_user = get_user_data(request.user)["user"]
     other_user = get_object_or_404(TwitterUser, pk=user_id)
     other_user.followers.remove(logged_user)
-    return redirect("homepage")
+    user_id = other_user.id
+    return redirect("userdetail", user_id=user_id)
 
 
 def user_followers(request, user_id):
