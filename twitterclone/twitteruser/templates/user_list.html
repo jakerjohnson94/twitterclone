@@ -1,0 +1,9 @@
+{% include "head.html"%}
+{% include "header.html"%}
+<div class="container">
+  {% for user in users  %}
+    {% include 'user_detail.html' with data=%}
+
+  {% endfor %}
+
+</div>

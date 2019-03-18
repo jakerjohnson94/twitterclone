@@ -2,7 +2,7 @@
   <div class="card-content">
 
     <span class="card-title">
-      {% if tweet.sender_id != data.user%}
+      {% if tweet.sender_id.id !=  data.user.id %}
       <a href="{% url 'userdetail' tweet.sender_id.user.id %}">@{{tweet.sender_id.handle}}</a>
       {% else %}
       @{{tweet.sender_id.handle}}

@@ -1,28 +1,22 @@
 <div class="row center" style="padding-bottom: 3em; padding-top: .5em;">
 
-    <button class="btn blue" style="margin-right: 1em;">
-      <a class='white-text' href={% url 'homepage' %}>
-      Home
-      </a>
-    </button>
-
-    <button class="btn blue">
-      <a class='white-text' href={% url 'tweetpost' %}>
-      Tweet
-      </a>
-    </button>
-
-    <button class="btn blue">
-      <a class='white-text' href={% url 'notifications' %}>
-      Notifications
-      </a>
-    </button>
-
-    <div class="btn blue" style="margin-left: 1em;">
-    <a class='white-text' href={% url 'logout' %}>
-      Logout
+    <a class='white-text' href={% url 'homepage' %}>
+      <button class="btn blue" style="margin-right: 1em;">
+        Home
+      </button>
     </a>
-    </div>
+
+    <a class='white-text' href={% url 'tweetpost' %}>
+      <button class="btn blue">
+        Tweet
+      </button>
+    </a>
+
+    <a class='white-text' href={% url 'logout' %}>
+      <button class="btn blue" style="margin-left: 1em;">
+        Logout
+     </button>
+    </a>
 
 
 </div>

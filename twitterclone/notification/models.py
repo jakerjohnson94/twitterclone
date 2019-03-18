@@ -12,5 +12,10 @@ class Notification(models.Model):
     )
 
     def __str__(self):
-        return f"@{self.tagged.handle.title()} tagged in Tweet from  @{self.tweet.sender_id.handle.title()}"
+        time = self.tweet.timestamp.time()
+        user_display_name = self.tagged.handle.title()
+        sender_name = self.tweet.sender_id.handle.title()
+        return (
+            f" {time} @{user_display_name} tagged in Tweet from  @{sender_name}"
+        )
 

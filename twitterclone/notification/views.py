@@ -5,7 +5,7 @@ from .models import Notification
 
 def user_notifications(request):
     html = "user_notifications.html"
-    data = get_user_data(request.user)
+    data = get_user_data(request.user)["data"]
     return render(request, html, data)
 
 

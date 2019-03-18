@@ -2,17 +2,29 @@
 {% include 'header.html' %}
 <div class="container">
 
+
+{% if notifications.count > 0  %}
   <h5>Notifications:</h5>
-  {% for notification in  data.notifications %}
+
+  {% for notification in  notifications %}
   <div class="card"> 
     <div class="card-card-content">
-    <a href="{% url 'deletenotification' notification.id%}">
-      <i class="material-icons">close</i>
-    </a>
+
+      <a class="center" href="{% url 'deletenotification' notification.id%}">
+        <i class="material-icons grey-text">close</i>
+      </a>
+
         {% include "tweet_detail.html" with tweet=notification.tweet %}
     </div>
   </div>
+  {% endfor %}
+
+{% else %}
+
+<h5 class="center-align"> No notifications right now. Go live your life. </h5>
+
+{% endif %}
 
 </div>
 
-{% endfor %}
+
