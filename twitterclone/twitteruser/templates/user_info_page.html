@@ -6,7 +6,8 @@
     <div class="col s4">
       {% include "user_detail.html" with data=data.other_user %}
 
-    {% if data.logged_user.id is not data.other_user.id %}
+
+
     <button class="btn blue">
       {% if data.followed == False %}
       <a class="white-text" href="{% url 'follow' data.other_user.user.id %}">Follow</a>
@@ -14,7 +15,8 @@
     <a class="white-text" href="{% url 'unfollow' data.other_user.user.id %}"> UnFollow </a> 
       {% endif %}
     </button>
-    {% endif %}
+
+
 
     </div>
         <div class="col s8">

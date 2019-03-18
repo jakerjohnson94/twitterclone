@@ -18,7 +18,9 @@ def get_user_data(user):
         Q(sender_id=t_user.id) | Q(sender_id__in=following)
     ).order_by("-timestamp")
 
-    notifications = Notification.objects.filter(tagged=t_user)
+    notifications = Notification.objects.filter(tagged=t_user).order_by(
+        "-tweet__timestamp"
+    )
     return {
         "data": {
             "user": t_user,

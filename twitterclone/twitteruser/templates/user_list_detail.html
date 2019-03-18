@@ -1,0 +1,10 @@
+<div class='card'>
+  <h5>
+    <a href="{% url "userdetail" user.id%}">
+    @{{user.handle}}</h2>
+    </a>
+  </h5>
+
+    <span>{{user.followers.count}} Follower(s)</span>
+
+</div>

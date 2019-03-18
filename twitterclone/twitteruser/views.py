@@ -1,4 +1,9 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import (
+    render,
+    get_object_or_404,
+    redirect,
+    get_list_or_404,
+)
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -9,6 +14,7 @@ from django.contrib.auth.models import User
 from .forms import TwitterUserSignupForm
 from twitterclone.tweet.models import Tweet
 from twitterclone.helpers import get_user_data
+import pprint
 
 
 def user_signup(request):
@@ -49,6 +55,7 @@ def user_info_page(request, user_id):
     followed = False
     if logged_user["user"] in other_user["followers"].all():
         followed = True
+    pprint.pprint(f"logged: {logged_user}             other:{other_user}")
     data = {
         "data": {
             "other_user": other_user,
@@ -57,6 +64,12 @@ def user_info_page(request, user_id):
         }
     }
     return render(request, html, data)
+
+
+def user_list(request):
+    html = "user_list.html"
+    users = get_list_or_404(TwitterUser)
+    return render(request, html, {"users": users})
 
 
 @login_required
