@@ -96,21 +96,17 @@ def user_followers(request, user_id):
     user_q = get_object_or_404(User, pk=user_id)
     user = get_user_data(user_q)["user"]
     followers = user.followers.all()
-    return render(
-        request,
-        html,
-        {"title": f"@{user.handle}'s followers", "users": followers},
-    )
+    data = {"title": f"@{user.handle}'s followers", "users": followers}
+    return render(request, html, data)
 
 
 def user_following(request, user_id):
     html = "user_list.html"
     user_q = get_object_or_404(User, pk=user_id)
-    data = get_user_data(user_q)
-    user = data["user"]
-    following = data["following"]
-    return render(
-        request,
-        html,
-        {"title": f"@{user.handle}'s followed users", "users": following},
-    )
+    user_data = get_user_data(user_q)
+    user = user_data["user"]
+    following = user_data["following"]
+
+    data = {"title": f"@{user.handle}'s followed users", "users": following}
+
+    return render(request, html, data)

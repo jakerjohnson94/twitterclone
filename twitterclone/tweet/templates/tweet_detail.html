@@ -4,10 +4,16 @@
 
   <div class="card-content">
 
+
+
     <span class="card-title">
 
       <a href="{% url 'userdetail' tweet.sender_id.user.id %}">@{{tweet.sender_id.handle}}</a>
-
+        {% if  user is not None and user.id == tweet.sender_id.id%}
+    <a class="right" href="{% url "tweetdelete" tweet.id %}">
+      <i class="material-icons">close</i>
+    </a>
+{% endif %}
     </span>
 
   <p class="grey-text">{{tweet.timestamp}}</p>

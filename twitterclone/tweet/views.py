@@ -15,7 +15,8 @@ from twitterclone.twitteruser.models import TwitterUser
 def tweet_detail(request, tweet_id):
     html = "tweet_detail_view.html"
     tweet = get_object_or_404(Tweet, pk=tweet_id)
-    return render(request, html, {"tweet": tweet})
+    user = request.user.twitter_user
+    return render(request, html, {"tweet": tweet, "user": user})
 
 
 @login_required
@@ -42,3 +43,11 @@ def tweet_post(request):
     else:
         form = PostTweetForm()
     return render(request, "tweet_post.html", {"form": form})
+
+
+def tweet_delete(request, tweet_id):
+    user = request.user.twitteruser
+    tweet = get_object_or_404(Tweet, pk=tweet_id)
+
+    tweet.delete()
+    return redirect(request.GET.get("next", "/"))
