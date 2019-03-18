@@ -66,6 +66,7 @@ def user_info_page(request, user_id):
     return render(request, html, data)
 
 
+@login_required
 def user_list(request):
     html = "user_list.html"
     users = get_list_or_404(TwitterUser)
@@ -91,3 +92,15 @@ def user_unfollow(request, user_id):
     other_user = get_object_or_404(TwitterUser, pk=user_id)
     other_user.followers.remove(logged_user)
     return redirect("homepage")
+
+
+def user_followers(request, user_id):
+    html = "user_list.html"
+    user_q = get_object_or_404(User, pk=user_id)
+    user = get_user_data(user_q)["data"]["user"]
+    followers = user.followers.all()
+    return render(
+        request,
+        html,
+        {"title": f"@{user.handle}'s Followers", "users": followers},
+    )

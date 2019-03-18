@@ -3,7 +3,10 @@
 <a href="{% url "userdetail"  data.user.id%}">
 @{{data.user.handle}}</h2>
 </a>
-<h4>{{data.followers.count}} Follower(s)</h4>
+<h4>
+<a href="{% url "followers"  data.user.id%}">
+{{data.followers.count}} Follower(s)</h4>
+</a>
 <h4> 
 
 {{data.sent_tweets.count}} Tweets(s)

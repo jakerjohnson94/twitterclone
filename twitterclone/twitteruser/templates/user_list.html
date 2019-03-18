@@ -1,6 +1,14 @@
 {% include "head.html"%}
 {% include "header.html"%}
 <div class="container">
+
+ <h4>
+{% if title %}
+{{title}}
+ {% else %}
+ Users
+{% endif %}
+ </h4>
   {% for user in users  %}
     {% include 'user_list_detail.html' with user=user%}
 
