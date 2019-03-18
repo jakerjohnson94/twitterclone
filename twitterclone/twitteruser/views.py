@@ -50,18 +50,15 @@ def user_detail(request, user_id):
 def user_info_page(request, user_id):
     html = "user_info_page.html"
     user = get_object_or_404(User, pk=user_id)
-    other_user = get_user_data(user)["data"]
-    logged_user = get_user_data(request.user)["data"]
+    other_user = get_user_data(user)
+    logged_user = get_user_data(request.user)
     followed = False
     if logged_user["user"] in other_user["followers"].all():
         followed = True
-    pprint.pprint(f"logged: {logged_user}             other:{other_user}")
     data = {
-        "data": {
-            "other_user": other_user,
-            "logged_user": logged_user,
-            "followed": followed,
-        }
+        "other_user": other_user,
+        "logged_user": logged_user,
+        "followed": followed,
     }
     return render(request, html, data)
 
@@ -81,14 +78,14 @@ def user_homepage(request):
 
 
 def user_follow(request, user_id):
-    logged_user = get_user_data(request.user)["data"]["user"]
+    logged_user = get_user_data(request.user)["user"]
     other_user = get_object_or_404(TwitterUser, pk=user_id)
     other_user.followers.add(logged_user)
     return redirect("homepage")
 
 
 def user_unfollow(request, user_id):
-    logged_user = get_user_data(request.user)["data"]["user"]
+    logged_user = get_user_data(request.user)["user"]
     other_user = get_object_or_404(TwitterUser, pk=user_id)
     other_user.followers.remove(logged_user)
     return redirect("homepage")
@@ -97,7 +94,7 @@ def user_unfollow(request, user_id):
 def user_followers(request, user_id):
     html = "user_list.html"
     user_q = get_object_or_404(User, pk=user_id)
-    user = get_user_data(user_q)["data"]["user"]
+    user = get_user_data(user_q)["user"]
     followers = user.followers.all()
     return render(
         request,

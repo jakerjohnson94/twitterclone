@@ -20,7 +20,7 @@ def tweet_detail(request, tweet_id):
 
 @login_required
 def tweet_post(request):
-    user_data = get_user_data(request.user)["data"]
+    user_data = get_user_data(request.user)
     html = "tweet_post.html"
     if request.method == "POST":
         form = PostTweetForm(request.POST)
@@ -30,9 +30,6 @@ def tweet_post(request):
             sender = user_data["user"]
             tweet = Tweet.objects.create(sender_id=sender, body=body)
 
-            # obj = form.save(commit=False)
-            # obj.sender_id = data["user"]
-            # obj.save()
             mentioned_user = get_mentioned_user(body)
             if mentioned_user is not False:
                 Notification.objects.create(tweet=tweet, tagged=mentioned_user)

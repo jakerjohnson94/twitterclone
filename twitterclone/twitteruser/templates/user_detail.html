@@ -1,15 +1,15 @@
 <div>
 <h2>
-<a href="{% url "userdetail"  data.user.id%}">
-@{{data.user.handle}}</h2>
+<a href="{% url "userdetail"  user.id%}">
+@{{user.handle}}</h2>
 </a>
 <h4>
-<a href="{% url "followers"  data.user.id%}">
-{{data.followers.count}} Follower(s)</h4>
+<a href="{% url "followers"  user.id%}">
+{{followers.count}} Follower(s)</h4>
 </a>
 <h4> 
 
-{{data.sent_tweets.count}} Tweets(s)
+{{sent_tweets.count}} Tweets(s)
 </h4>
 <br>
 </div>

@@ -6,7 +6,7 @@
 
     <div class="col s4">
       <div class="row">
-        {% include "user_detail.html" with data=data %}
+        {% include "user_detail.html"  %}
       </div>
       <div class="row">
         <div class="valign-wrapper">
@@ -16,8 +16,8 @@
             </a>
           </button>
           
-          {% if data.notifications.count >= 1%}
-            <span class="new badge red left center">{{data.notifications.count}}</span>
+          {% if notifications.count >= 1%}
+            <span class="new badge red left center">{{notifications.count}}</span>
           {% endif %}
           </div>
 
@@ -28,17 +28,9 @@
 
 
     <div class="col s8">
-      {% include "tweet_list.html" with tweets=data.all_tweets %}
+      {% include "tweet_list.html" with tweets=all_tweets %}
     </div>
 </div>
 
-
-    <div class='col s8'>
-
-
-
-
-
-  </div>
 
 </div>
