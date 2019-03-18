@@ -11,7 +11,7 @@
 
   <p class="grey-text">{{tweet.timestamp}}</p>
 
-  <p>{{tweet.body}}</p>
+  <p>{{tweet.body|safe}}</p>
 <a href="{% url "tweetdetail" tweet.id %}">
   <i class="material-icons">link</i>
 </a>
