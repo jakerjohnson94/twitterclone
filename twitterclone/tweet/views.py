@@ -33,6 +33,7 @@ def tweet_post(request):
             mentioned_user = get_mentioned_user(body)
             if mentioned_user is not False:
                 Notification.objects.create(tweet=tweet, tagged=mentioned_user)
+
             return redirect("homepage")
 
     else:
