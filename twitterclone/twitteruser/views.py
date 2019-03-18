@@ -99,5 +99,18 @@ def user_followers(request, user_id):
     return render(
         request,
         html,
-        {"title": f"@{user.handle}'s Followers", "users": followers},
+        {"title": f"@{user.handle}'s followers", "users": followers},
+    )
+
+
+def user_following(request, user_id):
+    html = "user_list.html"
+    user_q = get_object_or_404(User, pk=user_id)
+    data = get_user_data(user_q)
+    user = data["user"]
+    following = data["following"]
+    return render(
+        request,
+        html,
+        {"title": f"@{user.handle}'s followed users", "users": following},
     )

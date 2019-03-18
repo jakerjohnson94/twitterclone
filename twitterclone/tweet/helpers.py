@@ -14,6 +14,7 @@ def get_mentioned_users(message):
         if word.startswith("@") and word[1:] in user_handles:
             notified_user = get_object_or_404(TwitterUser, handle=word[1:])
             notified_users.append(notified_user)
+
             new_word = format_html(
                 '<a href="{}">@{}</a>',
                 reverse_lazy("userdetail", args=[notified_user.id]),
